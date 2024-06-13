@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration</title>
+    <!--link necessary to use bootstrap-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            font-size: 0.9em;
+        }
+        .control-label {
+            font-size: 0.9em;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .asterisk {
+            color: red;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">Customer Registration Form</h2>
+    <form id="registrationForm" th:action="@{/registration}" th:object="${customer}" method="post" class="form-horizontal">
+        <div class="form-group row">
+            <label for="title" class="col-sm-3 col-form-label">Title<span class="asterisk">*</span></label>
+            <div class="col-sm-9">
+                <select id="title" th:field="*{title}" class="form-control" required>
+                    <option value="" disabled selected>Select your title</option>
+                    <option value="Mr">Mr</option>
+                    <option value="Miss">Miss</option>
+                    <option value="Mrs">Mrs</option>
+                    <option value="Ms">Ms</option>
+                    <option value="Mx">Mx</option>
+                    <option value="Dr">Dr</option>
+                    <option value="Prof">Prof</option>
+                    <option value="Rev">Rev</option>
+                    <option value="Sir">Sir</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="firstName" class="col-sm-3 col-form-label">First Name<span class="asterisk">*</span></label>
+            <div class="col-sm-9">
+                <input type="text" id="firstName" th:field="*{firstName}" class="form-control" required maxlength="50" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lastName" class="col-sm-3 col-form-label">Last Name<span class="asterisk">*</span></label>
+            <div class="col-sm-9">
+                <input type="text" id="lastName" th:field="*{lastName}" class="form-control" required maxlength="50" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="emailAddress" class="col-sm-3 col-form-label">Email Address<span class="asterisk">*</span></label>
+            <div class="col-sm-9">
+                <input type="email" id="emailAddress" th:field="*{emailAddress}" class="form-control" required maxlength="255" />
+                <!--only field with error message, if needed for other fields can mimic this implementation-->
+                <div class="text-danger" id="emailAddressError" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="addressLine1" class="col-sm-3 col-form-label">Address Line 1<span class="asterisk">*</span></label>
+            <div class="col-sm-9">
+                <input type="text" id="addressLine1" th:field="*{addressLine1}" class="form-control" required maxlength="255" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="addressLine2" class="col-sm-3 col-form-label">Address Line 2</label>
+            <div class="col-sm-9">
+                <input type="text" id="addressLine2" th:field="*{addressLine2}" class="form-control" maxlength="255" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="city" class="col-sm-3 col-form-label">City</label>
+            <div class="col-sm-9">
+                <input type="text" id="city" th:field="*{city}" class="form-control" maxlength="255" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="postcode" class="col-sm-3 col-form-label">Postcode<span class="asterisk">*</span></label>
+            <div class="col-sm-9">
+                <input type="text" id="postcode" th:field="*{postcode}" class="form-control" required maxlength="10" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="phoneNumber" class="col-sm-3 col-form-label">Phone Number</label>
+            <div class="col-sm-9">
+                <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control" maxlength="20" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-12 text-center">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
